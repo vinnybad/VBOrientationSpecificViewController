@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface OrientationSpecificViewController : NSObject
+@interface OrientationSpecificViewController : UIViewController {
+    BOOL _cachesViews;
+}
+
+@property (assign, nonatomic) BOOL cachesViews;
 
 @end
