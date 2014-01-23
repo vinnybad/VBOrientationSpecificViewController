@@ -26,6 +26,7 @@
     if( self ) {
         _baseNibName = baseNibName;
         _isViewReappearing = NO;
+        _cachesViews = YES;
     }
     
     return self;
