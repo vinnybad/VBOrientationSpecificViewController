@@ -1,0 +1,14 @@
+PODS:
+  - VBOrientationSpecificViewController (0.1.0)
+
+DEPENDENCIES:
+  - VBOrientationSpecificViewController (from `../`)
+
+EXTERNAL SOURCES:
+  VBOrientationSpecificViewController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  VBOrientationSpecificViewController: 34a123d5318aec9ff4963bf27b483daf11a2a68b
+
+COCOAPODS: 0.29.0
