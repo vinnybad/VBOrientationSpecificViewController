@@ -1,3 +1,10 @@
 platform :ios, '7.0'
+
+# Normally you'd write the pod like the commented line below but because 
+# I always ship the pod with the example, I'm choosing to add it as a 
+# development pod so I don't have to keep changing the version for each 
+# release
+
+#pod 'VBOrientationSpecificViewController', '~> 0.1.0'
 pod 'VBOrientationSpecificViewController', :path => '../'
 
