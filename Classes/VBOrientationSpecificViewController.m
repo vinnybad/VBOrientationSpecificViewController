@@ -31,6 +31,7 @@
     return self;
 }
 
+#pragma mark - View Lifecycle Methods
 -(void)loadView {
     CGRect frame = [[UIScreen mainScreen] bounds];
     self.view = [[UIView alloc] initWithFrame:frame];
@@ -38,6 +39,32 @@
     [self reloadViewForCurrentOrientation];
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // this is a little tricky
+    // if the view will appear again, self.isViewAppearing will be set to YES
+    // if the view is actually being popped off of the stack, it's ok...because this
+    // will be deallocated anyway...
+    self.isViewReappearing = YES;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if( self.isViewReappearing ) {
+        [self reloadViewForCurrentOrientation];
+    }
+}
+
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    [self reloadViewForOrientation:toInterfaceOrientation];
+}
+
+
+#pragma mark - Utility Methods
 -(void)reloadViewForCurrentOrientation {
     UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     [self reloadViewForOrientation:statusBarOrientation];
@@ -61,8 +88,14 @@
         view = self.viewsForOrientations[nibName];
     }
     
-    [self removeAllSubviews];
+    [self removeAllSubviewsOfCurrentView];
+    
+    // this is tricky
+    // we set the view for the orientation to the parent view's frame
+    // and if the device is rotating, the os will take care of rotating
+    // the view...
     view.frame = self.view.frame;
+    
     [self.view addSubview:view];
 }
 
@@ -72,27 +105,7 @@
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    self.isViewReappearing = YES;
-    [self removeAllSubviews];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if( self.isViewReappearing ) {
-        [self reloadViewForCurrentOrientation];
-    }
-}
-
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    [self reloadViewForOrientation:toInterfaceOrientation];
-}
-
--(void)removeAllSubviews {
+-(void)removeAllSubviewsOfCurrentView {
     for (UIView *v in self.view.subviews) {
         [v removeFromSuperview];
     }
