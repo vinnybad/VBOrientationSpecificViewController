@@ -1,6 +1,9 @@
 VBOrientationSpecificViewController
 =================================
 
+[![Version](http://cocoapod-badges.herokuapp.com/v/VBOrientationSpecificViewController/badge.png)](http://cocoadocs.org/docsets/VBOrientationSpecificViewController)
+[![Platform](http://cocoapod-badges.herokuapp.com/p/VBOrientationSpecificViewController/badge.png)](http://cocoadocs.org/docsets/VBOrientationSpecificViewController)
+
 Allows for separate portrait and landscape views for the same view controller...using Nibs (Xib files).  
 
 
