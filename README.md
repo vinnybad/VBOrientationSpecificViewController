@@ -1,3 +1,7 @@
+# No Longer Maintained
+
+Developing iOS apps is very different today when compared to older standards.  As such, this component will no longer be maintained.  
+
 VBOrientationSpecificViewController
 =================================
 
